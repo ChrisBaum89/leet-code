@@ -1,35 +1,27 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def pivot_index(nums)
+    left_sum = 0
+    right_sum = nums.sum
+    
+    for i in 0..nums.size - 1 do
+        add_sub_val = nums[i]
+        right_sum = right_sum - add_sub_val
 
-    max_idx = nums.size - 1
-    for i in 0..max_idx do
-        #handles left sum
-        left_sum = 0
-        if i > 0
-            left_sum = nums[0..i-1].sum
-        end
-
-        #handle right sum
-        if i < max_idx
-            right_sum = nums[i+1..max_idx].sum
-        else
-            right_sum = 0
-        end
-
-        #compare left and right
         if left_sum == right_sum
             return i
         end
+        left_sum = left_sum + add_sub_val
+
     end
 
     return -1
 end
 
 ##My Psuedocode
-#Iterate through array
-# sum all to left[0..i-1]
-# sum all to right
-# compare sums
-# return index
-# a for loop may be good because it lets us easily return index
+# set left sum to 0
+# set right sum to nums.sum
+# need a way to iterate through (for loop?)
+# subtract index val from right sum
+# check if left = right
+# add index val to left sum
